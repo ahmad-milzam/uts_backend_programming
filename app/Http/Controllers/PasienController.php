@@ -14,7 +14,7 @@ class PasienController extends Controller
         # menggunakan model pasien untuk select data
         $pasien = pasien::all();
 
-        if ($pasien) {
+        if ($pasien->isNotEmpty()) {
             $data = [
                 'message' => 'Get All Resource',
                 'data' => $pasien
