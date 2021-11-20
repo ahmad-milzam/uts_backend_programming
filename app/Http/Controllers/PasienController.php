@@ -123,10 +123,34 @@ class PasienController extends Controller
             }
         }
 
-        public function search(Request $request)
+        public function destroy($id)
+        {
+            # cari id student yang ingin dihapus
+            $pasien = pasien::find($id);
+    
+            if ($pasien) {
+                # hapus pasien tersebut
+                $pasien->delete();
+    
+                $data = [
+                    'message' => 'Resource is deleted succesfully'
+                ];
+    
+                # mengembalikan data (json) dan kode 200
+                return response()->json($data, 200);
+            } else {
+                $data = [
+                    'message' => 'Resource is not found'
+                ];
+    
+                return response()->json($data, 404);
+            }
+        }
+
+        public function search($name)
         {
             # menggunakan model pasien untuk select data
-            $pasien = pasien::where('name', $request->name)->get() ;
+            $pasien = pasien::where('name', $name)->get() ;
     
             if($pasien->isNotEmpty()) {
                 $data = [
@@ -149,11 +173,13 @@ class PasienController extends Controller
         public function positive()
         {
             # menggunakan model pasien untuk select data
-            $pasien = pasien::where('status', 'positive')->get() ;
+            $pasien = pasien::where('status', 'positive')->get(); //get pasien status = 'positive'
+            $count = pasien::where('status', 'positive')->count(); //hitung data
     
             if($pasien->isNotEmpty()) {
                 $data = [
                     'message' => 'Get searched resource',
+                    'total' => $count,
                     'data' => $pasien
                 ];
                 # mengirim data (json) dan kode 200
@@ -172,11 +198,13 @@ class PasienController extends Controller
         public function recovered()
         {
             # menggunakan model pasien untuk select data
-            $pasien = pasien::where('status', 'negative')->get() ;
+            $pasien = pasien::where('status', 'negative')->get(); //get pasien status 'negative'
+            $count = pasien::where('status', 'negative')->count(); //hitung data
     
             if($pasien->isNotEmpty()) {
                 $data = [
                     'message' => 'Get searched resource',
+                    'total' => $count,
                     'data' => $pasien
                 ];
                 # mengirim data (json) dan kode 200
@@ -195,11 +223,13 @@ class PasienController extends Controller
         public function dead()
         {
             # menggunakan model pasien untuk select data
-            $pasien = pasien::where('status', 'dead')->get() ;
+            $pasien = pasien::where('status', 'dead')->get(); //get pasien status = 'dead'
+            $count = pasien::where('status', 'dead')->count(); //hitung data
     
             if($pasien->isNotEmpty()) {
                 $data = [
                     'message' => 'Get searched resource',
+                    'total' => $count,
                     'data' => $pasien
                 ];
                 # mengirim data (json) dan kode 200
