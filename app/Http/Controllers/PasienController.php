@@ -63,7 +63,6 @@ class PasienController extends Controller
                 return ["Result" => "Operation Failed"];
             }
         }
-        // $validated = $request->safe()->only(['name', 'phone', 'address', '']);
     }
     public function show ($id)
     {
