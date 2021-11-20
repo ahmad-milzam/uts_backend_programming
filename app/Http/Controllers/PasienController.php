@@ -90,7 +90,7 @@ class PasienController extends Controller
         # method update
         public function update(Request $request, $id)
         {
-            # cari id student yang ingin diupdate
+            # cari id pasien yang ingin diupdate
             $pasien = pasien::find($id);
     
             if ($pasien) {
@@ -125,7 +125,7 @@ class PasienController extends Controller
 
         public function destroy($id)
         {
-            # cari id student yang ingin dihapus
+            # cari id pasien yang ingin dihapus
             $pasien = pasien::find($id);
     
             if ($pasien) {
